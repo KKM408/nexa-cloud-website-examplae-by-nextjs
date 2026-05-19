@@ -1,0 +1,43 @@
+/* components/ui/Button.module.css */
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  border-radius: var(--radius-sm);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+  text-decoration: none;
+}
+
+.primary {
+  background: var(--gradient-primary);
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+}
+
+.primary:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 30px rgba(102, 126, 234, 0.4);
+}
+
+.secondary {
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  backdrop-filter: blur(10px);
+}
+
+.secondary:hover {
+  background: var(--color-surface-hover);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.large {
+  padding: 16px 36px;
+  font-size: 17px;
+}
