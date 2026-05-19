@@ -1,0 +1,45 @@
+/* components/features/ComparisonTable.module.css */
+.wrapper {
+  margin-top: 80px;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.table th {
+  padding: 16px 24px;
+  text-align: left;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  border-bottom: 2px solid var(--color-border);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.table td {
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+}
+
+.table td:first-child {
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+.yes { color: #667eea !important; font-weight: 700; }
+.no { color: var(--color-text-faint) !important; }
+
+.highlight {
+  background: rgba(102, 126, 234, 0.05);
+}
+
+.planName {
+  color: var(--color-text) !important;
+  font-weight: 700 !important;
+}
