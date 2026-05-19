@@ -1,0 +1,55 @@
+---
+title: "Server Components 深度解析"
+date: "2026-05-10"
+author: "NexaCloud Team"
+tags: ["nextjs", "server-components", "react"]
+excerpt: "Server Components 不是 SSR 的升级版——它是全新的范式。理解 RSC 与 'use client' 的边界划分，写出性能最优的 Next.js 应用。"
+coverImage: "/images/blog/server-components.jpg"
+---
+
+# Server Components 深度解析
+
+React Server Components (RSC) 是过去几年 React 生态中最重要的架构变化。
+
+## Server vs Client Components
+
+**Server Components（默认）：**
+- 在服务器执行，不发送 JS 到客户端
+- 可以直接访问数据库、文件系统
+- 不能使用 `useState`、`useEffect`、事件处理器
+
+**Client Components（`'use client'`）：**
+- 在浏览器执行
+- 支持所有 React hooks
+- 支持用户交互
+
+## 边界划分原则
+
+把 `'use client'` 推到组件树的叶节点：
+
+```tsx
+export default function ProductPage() {
+  const product = await fetchProduct();
+  return (
+    <div>
+      <ProductInfo product={product} />
+      <AddToCartButton productId={product.id} />
+    </div>
+  );
+}
+```
+
+## 数据获取
+
+Server Components 可以直接 `async/await`：
+
+```tsx
+async function BlogList() {
+  const posts = await fetch('https://api.example.com/posts').then(r => r.json());
+  return <ul>{posts.map(post => <li key={post.id}>{post.title}</li>)}</ul>;
+}
+```
+
+## 结论
+
+Server Components 的核心价值：把数据获取和渲染放在服务器，仅把交互岛（Client Components）发送给浏览器。这是性能优化的根本。

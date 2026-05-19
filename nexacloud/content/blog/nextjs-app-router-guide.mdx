@@ -1,0 +1,64 @@
+---
+title: "Next.js App Router 完全指南"
+date: "2026-05-15"
+author: "NexaCloud Team"
+tags: ["nextjs", "app-router", "tutorial"]
+excerpt: "从 Pages Router 迁移到 App Router？本文覆盖所有核心概念：layouts、loading states、error boundaries，以及 Server Components 的工作原理。"
+coverImage: "/images/blog/app-router.jpg"
+---
+
+# Next.js App Router 完全指南
+
+Next.js 13 引入的 App Router 彻底改变了构建 React 应用的方式。本文带你系统掌握所有核心概念。
+
+## 什么是 App Router
+
+App Router 基于 React Server Components (RSC) 构建，允许组件在服务器端渲染，减少发送到客户端的 JavaScript 体积。
+
+## 文件系统路由
+
+在 `app/` 目录中，每个 `page.tsx` 文件对应一个路由：
+
+```
+app/
+├── page.tsx          → /
+├── about/page.tsx    → /about
+└── blog/
+    ├── page.tsx      → /blog
+    └── [slug]/
+        └── page.tsx  → /blog/:slug
+```
+
+## 嵌套布局
+
+`layout.tsx` 在路由之间共享 UI，且在导航时不重新渲染：
+
+```tsx
+// app/layout.tsx
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <body>
+        <Navbar />
+        {children}
+        <Footer />
+      </body>
+    </html>
+  );
+}
+```
+
+## Loading & Error 状态
+
+`loading.tsx` 在页面加载时自动显示，`error.tsx` 捕获运行时错误：
+
+```tsx
+// app/blog/loading.tsx
+export default function Loading() {
+  return <div>Loading posts...</div>;
+}
+```
+
+## 结论
+
+App Router 让构建复杂应用变得更直观。掌握 layouts、Server Components 和数据获取模式，你就掌握了现代 Next.js 开发的核心。

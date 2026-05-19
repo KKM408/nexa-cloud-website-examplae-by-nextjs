@@ -1,0 +1,64 @@
+---
+title: "Next.js 性能优化实践"
+date: "2026-05-05"
+author: "NexaCloud Team"
+tags: ["nextjs", "performance", "optimization"]
+excerpt: "Core Web Vitals 决定 SEO 排名和用户体验。本文系统梳理 Next.js 中的图片优化、字体优化、代码分割和缓存策略。"
+coverImage: "/images/blog/performance.jpg"
+---
+
+# Next.js 性能优化实践
+
+性能是功能。糟糕的 Core Web Vitals 不仅影响用户体验，还直接影响 Google 搜索排名。
+
+## next/image
+
+`next/image` 自动处理图片优化：
+
+```tsx
+import Image from 'next/image';
+
+<Image
+  src="/hero.jpg"
+  alt="Hero"
+  width={1200}
+  height={630}
+  priority
+/>
+```
+
+特性：WebP 自动转换、懒加载、防止 CLS（累积布局偏移）。
+
+## next/font
+
+`next/font` 内联字体，消除 FOUT（无样式文本闪烁）：
+
+```tsx
+import { Inter } from 'next/font/google';
+const inter = Inter({ subsets: ['latin'] });
+export default function Layout({ children }) {
+  return <html className={inter.className}>{children}</html>;
+}
+```
+
+## 缓存策略
+
+```tsx
+export const revalidate = false;    // SSG
+export const revalidate = 3600;     // ISR 每小时
+export const dynamic = 'force-dynamic'; // 动态
+```
+
+## 代码分割
+
+```tsx
+import dynamic from 'next/dynamic';
+const HeavyChart = dynamic(() => import('./HeavyChart'), {
+  loading: () => <p>Loading chart...</p>,
+  ssr: false,
+});
+```
+
+## 结论
+
+优先 SSG/ISR 减少服务器负载，用 `next/image` 和 `next/font` 消除常见性能陷阱，用 `dynamic` 延迟加载非关键组件。
