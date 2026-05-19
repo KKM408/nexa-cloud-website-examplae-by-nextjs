@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(npx create-next-app@latest nexacloud --typescript --no-tailwind --app --no-src-dir --no-turbopack --import-alias \"@/*\" --yes)",
+      "Bash(npm install *)",
+      "Bash(echo \".superpowers\")",
+      "Bash(echo \".env.local\")",
+      "Bash(npm run *)",
+      "Bash(npx tsc *)"
+    ]
+  }
+}
