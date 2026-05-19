@@ -1,17 +1,10 @@
-// components/blog/MDXRenderer.tsx
-'use client';
-
-import { MDXRemote, type MDXRemoteSerializeResult } from 'next-mdx-remote';
+import { MDXRemote } from 'next-mdx-remote/rsc';
 import styles from './MDXRenderer.module.css';
 
-interface MDXRendererProps {
-  source: MDXRemoteSerializeResult;
-}
-
-export default function MDXRenderer({ source }: MDXRendererProps) {
+export default function MDXRenderer({ source }: { source: string }) {
   return (
     <div className={styles.prose}>
-      <MDXRemote {...source} />
+      <MDXRemote source={source} />
     </div>
   );
 }

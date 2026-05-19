@@ -1,12 +1,11 @@
 // app/(marketing)/blog/[slug]/page.tsx
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { serialize } from 'next-mdx-remote/serialize';
 import { getAllSlugs, getPostBySlug } from '@/lib/mdx';
 import MDXRenderer from '@/components/blog/MDXRenderer';
 
 interface BlogPostPageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export function generateStaticParams() {
@@ -15,7 +14,8 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
   try {
-    const post = getPostBySlug(params.slug);
+    const { slug } = await params;
+    const post = getPostBySlug(slug);
     return { title: post.title, description: post.excerpt };
   } catch {
     return { title: 'Post not found' };
@@ -23,14 +23,13 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
+  const { slug } = await params;
   let post;
   try {
-    post = getPostBySlug(params.slug);
+    post = getPostBySlug(slug);
   } catch {
     notFound();
   }
-
-  const mdxSource = await serialize(post.content);
 
   return (
     <div style={{ maxWidth: '720px', margin: '0 auto', padding: '64px 24px' }}>
@@ -68,7 +67,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           <span>{new Date(post.date).toLocaleDateString('zh-CN')}</span>
         </div>
       </div>
-      <MDXRenderer source={mdxSource} />
+      <MDXRenderer source={post!.content} />
     </div>
   );
 }
