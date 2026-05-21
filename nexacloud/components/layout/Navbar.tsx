@@ -1,12 +1,10 @@
-// components/layout/Navbar.tsx
 import Link from 'next/link';
 import styles from './Navbar.module.css';
 
 const links = [
-  { href: '/features', label: 'Features' },
-  { href: '/pricing', label: 'Pricing' },
-  { href: '/blog', label: 'Blog' },
-  { href: '/contact', label: 'Contact' },
+  { href: '/', label: 'Home' },
+  { href: '/posts', label: 'Posts' },
+  { href: '/about', label: 'About' },
 ];
 
 export default function Navbar() {
@@ -14,7 +12,7 @@ export default function Navbar() {
     <header className={styles.navbar}>
       <div className={styles.inner}>
         <Link href="/" className={styles.logo}>
-          NexaCloud
+          Zhang.dev
         </Link>
         <nav className={styles.nav}>
           {links.map((link) => (
@@ -22,8 +20,8 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
-          <Link href="#" className={styles.cta}>
-            Get Started
+          <Link href="/admin" className={styles.cta}>
+            Admin
           </Link>
         </nav>
         <button className={styles.mobileMenu} aria-label="Open menu">

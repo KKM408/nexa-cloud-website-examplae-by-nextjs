@@ -1,30 +1,21 @@
-// components/layout/Footer.tsx
 import Link from 'next/link';
 import styles from './Footer.module.css';
 
 const columns = [
   {
-    title: 'Product',
+    title: 'Blog',
     links: [
-      { href: '/features', label: 'Features' },
-      { href: '/pricing', label: 'Pricing' },
-      { href: '/blog', label: 'Blog' },
+      { href: '/', label: 'Home' },
+      { href: '/posts', label: 'All Posts' },
+      { href: '/about', label: 'About' },
     ],
   },
   {
-    title: 'Company',
+    title: 'Connect',
     links: [
-      { href: '#', label: 'About' },
-      { href: '#', label: 'Careers' },
-      { href: '#', label: 'Press' },
-    ],
-  },
-  {
-    title: 'Legal',
-    links: [
-      { href: '#', label: 'Privacy' },
-      { href: '#', label: 'Terms' },
-      { href: '#', label: 'Security' },
+      { href: 'https://github.com', label: 'GitHub' },
+      { href: 'https://twitter.com', label: 'Twitter' },
+      { href: 'mailto:admin@blog.com', label: 'Email' },
     ],
   },
 ];
@@ -35,9 +26,9 @@ export default function Footer() {
       <div className={styles.inner}>
         <div className={styles.grid}>
           <div>
-            <div className={styles.brand}>NexaCloud</div>
+            <div className={styles.brand}>Zhang.dev</div>
             <p className={styles.brandDesc}>
-              The cloud collaboration platform built for modern enterprises. Scale without limits.
+              Thoughts on full-stack development, open source, and building things.
             </p>
           </div>
           {columns.map((col) => (
@@ -45,7 +36,7 @@ export default function Footer() {
               <div className={styles.colTitle}>{col.title}</div>
               <ul className={styles.colLinks}>
                 {col.links.map((link) => (
-                  <li key={link.href}>
+                  <li key={link.label}>
                     <Link href={link.href}>{link.label}</Link>
                   </li>
                 ))}
@@ -54,8 +45,8 @@ export default function Footer() {
           ))}
         </div>
         <div className={styles.bottom}>
-          <span>© 2026 NexaCloud, Inc. All rights reserved.</span>
-          <span>Built with Next.js 15</span>
+          <span>© 2026 Zhang. All rights reserved.</span>
+          <span>Built with Next.js</span>
         </div>
       </div>
     </footer>
