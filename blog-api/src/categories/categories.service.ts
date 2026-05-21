@@ -1,0 +1,18 @@
+import { Injectable } from '@nestjs/common';
+import { PrismaService } from '../prisma/prisma.service';
+
+@Injectable()
+export class CategoriesService {
+  constructor(private prisma: PrismaService) {}
+
+  findAll() {
+    return this.prisma.category.findMany({
+      include: { _count: { select: { posts: true } } },
+      orderBy: { name: 'asc' },
+    });
+  }
+
+  create(name: string, slug: string) {
+    return this.prisma.category.create({ data: { name, slug } });
+  }
+}
