@@ -1,39 +1,24 @@
-// components/blog/BlogCard.tsx
 import Link from 'next/link';
-import type { BlogPost } from '@/types';
+import type { Post } from '@/lib/types';
 import styles from './BlogCard.module.css';
 
-type BlogCardProps = Omit<BlogPost, 'content'>;
-
-const tagEmojis: Record<string, string> = {
-  nextjs: '▲',
-  react: '⚛',
-  performance: '⚡',
-  'server-components': '🖥',
-  'app-router': '🗺',
-  optimization: '🔧',
-  tutorial: '📖',
-};
-
-export default function BlogCard({ slug, title, date, tags, excerpt, author }: BlogCardProps) {
-  const emoji = tagEmojis[tags[0]] ?? '📝';
-
+export default function BlogCard({ slug, title, excerpt, createdAt, category, tags, readingTime }: Post) {
   return (
-    <Link href={`/blog/${slug}`} className={styles.card}>
-      <div className={styles.cover}>{emoji}</div>
+    <Link href={`/posts/${slug}`} className={styles.card}>
       <div className={styles.body}>
         <div className={styles.tags}>
-          {tags.map((tag) => (
-            <span key={tag} className={styles.tag}>
-              {tag}
+          <span className={styles.category}>{category.name}</span>
+          {tags.slice(0, 2).map(({ tag }) => (
+            <span key={tag.id} className={styles.tag}>
+              {tag.name}
             </span>
           ))}
         </div>
         <h3 className={styles.title}>{title}</h3>
         <p className={styles.excerpt}>{excerpt}</p>
         <div className={styles.meta}>
-          <span>{author}</span>
-          <span>{new Date(date).toLocaleDateString('zh-CN')}</span>
+          <span>{new Date(createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+          <span>{readingTime} min read</span>
         </div>
       </div>
     </Link>
