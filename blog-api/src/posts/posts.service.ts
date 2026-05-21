@@ -89,7 +89,7 @@ export class PostsService {
       where: { id },
       data: {
         ...data,
-        ...(tagIds && { tags: { create: tagIds.map((tagId) => ({ tagId })) } }),
+        ...(tagIds !== undefined && tagIds.length > 0 && { tags: { create: tagIds.map((tagId) => ({ tagId })) } }),
       },
       include: { category: true, tags: { include: { tag: true } } },
     });
