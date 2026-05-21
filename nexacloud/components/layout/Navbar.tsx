@@ -20,8 +20,8 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
-          <Link href="/admin" className={styles.cta}>
-            Admin
+          <Link href="/admin" className={styles.creator}>
+            创作者中心
           </Link>
         </nav>
         <button className={styles.mobileMenu} aria-label="Open menu">

@@ -49,7 +49,7 @@ export default function AdminLoginPage() {
           </label>
           <label className={styles.label}>
             Password
-            <input name="password" type="password" required className={styles.input} />
+            <input name="password" type="password" required className={styles.input} defaultValue="admin123" />
           </label>
           {error && <p className={styles.error}>{error}</p>}
           <button type="submit" className={styles.submit} disabled={loading}>

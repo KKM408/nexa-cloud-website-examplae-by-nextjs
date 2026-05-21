@@ -1,34 +1,33 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
-import PersonalHero from '@/components/blog/PersonalHero';
-import BlogCard from '@/components/blog/BlogCard';
-import { getFeaturedPosts } from '@/lib/api';
+import { getPosts } from '@/lib/api';
+import CategorySidebar from '@/components/blog/CategorySidebar';
+import PostFeed from '@/components/blog/PostFeed';
+import RightPanel from '@/components/blog/RightPanel';
+import styles from './page.module.css';
 
 export const metadata: Metadata = {
   title: 'Zhang.dev — Full-Stack Development Blog',
 };
 
-export default async function HomePage() {
-  const featured = await getFeaturedPosts();
+export const dynamic = 'force-dynamic';
+
+interface Props {
+  searchParams: Promise<{ category?: string }>;
+}
+
+export default async function HomePage({ searchParams }: Props) {
+  const { category } = await searchParams;
+
+  const { posts } = await getPosts({ category });
+console.log('posts:', posts);
+
+  const ranking = [...posts].sort((a, b) => b.views - a.views).slice(0, 5);
 
   return (
-    <>
-      <PersonalHero />
-      <section className="section">
-        <div className="container">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '48px' }}>
-            <h2 className="section-title" style={{ margin: 0 }}>Featured Posts</h2>
-            <Link href="/posts" style={{ color: 'var(--color-primary)', fontSize: '14px', fontWeight: 600 }}>
-              View all →
-            </Link>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '24px' }}>
-            {featured.map((post) => (
-              <BlogCard key={post.id} {...post} />
-            ))}
-          </div>
-        </div>
-      </section>
-    </>
+    <div className={styles.layout}>
+      <CategorySidebar activeCategory={category} />
+      <PostFeed posts={posts} activeCategory={category} />
+      <RightPanel ranking={ranking} />
+    </div>
   );
 }

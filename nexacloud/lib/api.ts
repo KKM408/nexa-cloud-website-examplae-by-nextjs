@@ -12,21 +12,24 @@ export async function getFeaturedPosts(): Promise<Post[]> {
 
 export async function getPosts(params?: {
   page?: number;
-  limit?: number;
+  pageSize?: number;
   category?: string;
   tag?: string;
   search?: string;
 }): Promise<PostsResponse> {
   const query = new URLSearchParams();
   if (params?.page) query.set('page', String(params.page));
-  if (params?.limit) query.set('limit', String(params.limit));
+  if (params?.pageSize) query.set('pageSize', String(params.pageSize));
   if (params?.category) query.set('category', params.category);
   if (params?.tag) query.set('tag', params.tag);
   if (params?.search) query.set('search', params.search);
 
   const res = await fetch(`${API_URL}/api/posts?${query}`, {
-    next: { revalidate: 60, tags: ['posts'] },
+    cache: 'no-store',
   });
+
+
+
   if (!res.ok) throw new Error('Failed to fetch posts');
   return res.json();
 }
