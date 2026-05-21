@@ -13,10 +13,10 @@ export default function ContactPage() {
         <div style={{ marginBottom: '48px' }}>
           <span
             style={{
-              background: 'rgba(102,126,234,0.12)',
-              border: '1px solid rgba(102,126,234,0.25)',
+              background: 'rgba(37,99,235,0.15)',
+              border: '1px solid rgba(37,99,235,0.3)',
               borderRadius: '100px',
-              color: '#a5b4fc',
+              color: '#93c5fd',
               display: 'inline-block',
               fontSize: '13px',
               fontWeight: 600,

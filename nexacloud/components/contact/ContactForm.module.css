@@ -18,26 +18,27 @@
 
 .input,
 .textarea {
-  background: var(--color-surface);
+  background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   color: var(--color-text);
   font-family: var(--font-sans);
   font-size: 15px;
   padding: 12px 16px;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s;
   width: 100%;
 }
 
 .input:focus,
 .textarea:focus {
-  border-color: var(--color-primary);
+  border-color: rgba(37, 99, 235, 0.6);
   outline: none;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
 }
 
 .input::placeholder,
 .textarea::placeholder {
-  color: var(--color-text-muted);
+  color: var(--color-text-faint);
 }
 
 .textarea {
@@ -56,6 +57,7 @@
   font-weight: 700;
   padding: 14px 36px;
   transition: opacity 0.2s, transform 0.2s;
+  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.35);
 }
 
 .submit:hover:not(:disabled) {

@@ -51,7 +51,7 @@ export default function PricingPage() {
         </p>
       </div>
       <BillingToggle onToggle={setIsYearly} />
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px', alignItems: 'start' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px' }}>
         {plans.map((plan) => (
           <PricingCard key={plan.name} plan={plan} isYearly={isYearly} />
         ))}

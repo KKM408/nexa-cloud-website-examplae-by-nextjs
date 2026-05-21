@@ -39,9 +39,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             <span
               key={tag}
               style={{
-                background: 'rgba(102,126,234,0.12)',
-                color: '#a5b4fc',
-                border: '1px solid rgba(102,126,234,0.2)',
+                background: 'rgba(37,99,235,0.15)',
+                color: '#93c5fd',
+                border: '1px solid rgba(37,99,235,0.25)',
                 padding: '2px 10px',
                 borderRadius: '100px',
                 fontSize: '12px',
