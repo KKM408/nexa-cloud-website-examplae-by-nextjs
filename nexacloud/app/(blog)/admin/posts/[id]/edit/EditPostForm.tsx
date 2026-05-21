@@ -3,7 +3,7 @@
 import { useState, FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import type { Post } from '@/lib/types';
-import styles from '../../posts/new/page.module.css';
+import styles from '../../new/page.module.css';
 
 export default function EditPostForm({ post }: { post: Post }) {
   const router = useRouter();
