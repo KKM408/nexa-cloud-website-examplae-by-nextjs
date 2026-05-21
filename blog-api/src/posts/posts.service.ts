@@ -7,10 +7,17 @@ import { UpdatePostDto } from './dto/update-post.dto';
 export class PostsService {
   constructor(private prisma: PrismaService) {}
 
-  async findAll(page = 1, limit = 10, category?: string, tag?: string, search?: string) {
-    const skip = (page - 1) * limit;
-    const where: any = { published: true };
+  async findAll(params: {
+    page?: number;
+    pageSize?: number;
+    category?: string;
+    tag?: string;
+    search?: string;
+  }) {
+    const { page, pageSize, category, tag, search } = params;
+    const paginated = page !== undefined && pageSize !== undefined;
 
+    const where: any = { published: true };
     if (category) where.category = { slug: category };
     if (tag) where.tags = { some: { tag: { slug: tag } } };
     if (search) where.OR = [
@@ -21,8 +28,7 @@ export class PostsService {
     const [posts, total] = await Promise.all([
       this.prisma.post.findMany({
         where,
-        skip,
-        take: limit,
+        ...(paginated && { skip: (page - 1) * pageSize, take: pageSize }),
         orderBy: { createdAt: 'desc' },
         include: {
           author: { select: { name: true, avatar: true } },
@@ -33,7 +39,11 @@ export class PostsService {
       this.prisma.post.count({ where }),
     ]);
 
-    return { posts, total, page, totalPages: Math.ceil(total / limit) };
+    return {
+      posts,
+      total,
+      ...(paginated && { page, pageSize, totalPages: Math.ceil(total / pageSize) }),
+    };
   }
 
   async findFeatured() {

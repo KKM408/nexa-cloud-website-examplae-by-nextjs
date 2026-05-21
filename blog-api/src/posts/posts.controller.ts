@@ -22,13 +22,13 @@ export class PostsController {
 
   @Get()
   findAll(
-    @Query('page', new ParseIntPipe({ optional: true })) page = 1,
-    @Query('limit', new ParseIntPipe({ optional: true })) limit = 10,
+    @Query('page', new ParseIntPipe({ optional: true })) page?: number,
+    @Query('pageSize', new ParseIntPipe({ optional: true })) pageSize?: number,
     @Query('category') category?: string,
     @Query('tag') tag?: string,
     @Query('search') search?: string,
   ) {
-    return this.posts.findAll(page, limit, category, tag, search);
+    return this.posts.findAll({ page, pageSize, category, tag, search });
   }
 
   @Get('featured')
