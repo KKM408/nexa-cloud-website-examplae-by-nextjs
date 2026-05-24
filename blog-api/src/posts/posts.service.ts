@@ -1,7 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, ConflictException, BadRequestException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
+import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class PostsService {
@@ -76,14 +77,22 @@ export class PostsService {
 
   async create(dto: CreatePostDto, authorId: number) {
     const { tagIds, ...data } = dto;
-    return this.prisma.post.create({
-      data: {
-        ...data,
-        authorId,
-        tags: tagIds ? { create: tagIds.map((tagId) => ({ tagId })) } : undefined,
-      },
-      include: { category: true, tags: { include: { tag: true } } },
-    });
+    try {
+      return await this.prisma.post.create({
+        data: {
+          ...data,
+          authorId,
+          tags: tagIds ? { create: tagIds.map((tagId) => ({ tagId })) } : undefined,
+        },
+        include: { category: true, tags: { include: { tag: true } } },
+      });
+    } catch (e) {
+      if (e instanceof Prisma.PrismaClientKnownRequestError) {
+        if (e.code === 'P2002') throw new ConflictException(`slug "${dto.slug}" 已存在`);
+        if (e.code === 'P2003') throw new BadRequestException(`关联数据不存在（${e.meta?.field_name}）`);
+      }
+      throw e;
+    }
   }
 
   async update(id: number, dto: UpdatePostDto) {

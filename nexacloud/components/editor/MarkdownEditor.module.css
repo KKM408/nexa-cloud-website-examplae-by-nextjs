@@ -1,0 +1,96 @@
+.wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.wrapper>div {
+  height: 100%;
+}
+
+.wrapper :global(.bytemd) {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border: none;
+  border-radius: 0;
+  background: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.wrapper :global(.bytemd-toolbar) {
+  flex-shrink: 0;
+  background: #fff;
+  border-bottom: 1px solid #e8eaed;
+  padding: 0 16px;
+}
+
+.wrapper :global(.bytemd-toolbar-icon):hover {
+  background: #f0f2f5;
+  border-radius: 4px;
+}
+
+.wrapper :global(.bytemd-body) {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  background: #f7f8fa;
+}
+
+.wrapper :global(.markdown-body) p {
+    line-height: inherit;
+    margin-top: 22px;
+    margin-bottom: 22px;
+}
+
+.wrapper :global(.bytemd-editor) {
+  border-right: 1px solid #e8eaed;
+  background: #fff;
+}
+
+.wrapper :global(.CodeMirror) {
+  background: #fff;
+  font-size: 15px;
+  line-height: 1.75;
+  color: #1a1a1a;
+  font-family: 'SF Mono', 'Fira Code', 'Courier New', monospace;
+  height: 100%;
+}
+
+.wrapper :global(.CodeMirror-scroll) {
+  padding-bottom: 0;
+}
+
+.wrapper :global(.bytemd-preview) {
+  background: #fff;
+  padding: 24px 32px;
+  overflow-y: auto;
+}
+
+.wrapper :global(.markdown-body) {
+  font-size: 15px;
+  line-height: 1.75;
+  color: #1a1a1a;
+}
+
+.wrapper :global(.markdown-body) blockquote {
+    color: #666;
+    padding: 1px 23px;
+    margin: 22px 0;
+    border-left: 4px solid #cbcbcb;
+    background-color: #f8f8f8;
+}
+
+.wrapper :global(.bytemd-status) {
+  background: #fff;
+  border-top: 1px solid #e8eaed;
+  font-size: 12px;
+  color: #8a919f;
+  padding: 6px 16px;
+}
+
+.wrapper :global(.bytemd-status-left),
+.wrapper :global(.bytemd-status-right) {
+  color: #8a919f;
+}

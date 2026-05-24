@@ -83,3 +83,42 @@ img {
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* bytemd editor scrollbars (light background) */
+.CodeMirror-vscrollbar::-webkit-scrollbar,
+.CodeMirror-hscrollbar::-webkit-scrollbar,
+.bytemd-preview::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.CodeMirror-vscrollbar::-webkit-scrollbar-thumb,
+.CodeMirror-hscrollbar::-webkit-scrollbar-thumb,
+.bytemd-preview::-webkit-scrollbar-thumb {
+  background: #c1c5cc;
+  border-radius: 2px;
+}
+
+.CodeMirror-vscrollbar::-webkit-scrollbar-track,
+.CodeMirror-hscrollbar::-webkit-scrollbar-track,
+.bytemd-preview::-webkit-scrollbar-track {
+  background: transparent;
+}
