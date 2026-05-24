@@ -88,7 +88,7 @@ export class PostsService {
       });
     } catch (e) {
       if (e instanceof Prisma.PrismaClientKnownRequestError) {
-        if (e.code === 'P2002') throw new ConflictException(`slug "${dto.slug}" 已存在`);
+        if (e.code === 'P2002') throw new ConflictException(`slug '${dto.slug}' 已存在`);
         if (e.code === 'P2003') throw new BadRequestException(`关联数据不存在（${e.meta?.field_name}）`);
       }
       throw e;

@@ -19,8 +19,6 @@ export default async function HomePage({ searchParams }: Props) {
   const { category } = await searchParams;
 
   const { posts } = await getPosts({ category });
-console.log('posts:', posts);
-
   const ranking = [...posts].sort((a, b) => b.views - a.views).slice(0, 5);
 
   return (
